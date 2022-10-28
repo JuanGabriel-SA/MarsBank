@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&family=Vazirmatn:wght@300;400;600&display=swap');
+
+:root {
+  --primary-color1: #120078;
+  --primary-color2: #9D0191;
+  --primary-color3: #f73f52;
+  --primary-color4: #FECD1A;
+  --secondary-color1: #bc313f;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  font-family: 'Vazirmatn', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: 'Manrope', sans-serif;
+  background-image: url('./imgs/background-1.png');
+  background-position-y: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.background-element {
+  background-repeat: no-repeat;
+  position: absolute;
 }
 
-.App-link {
-  color: #61dafb;
+.button-field {
+  margin-top: 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+#logo {
+  position: fixed;
+  top: -30px;
+  left: -30px;
+  z-index: 3;
+}
+
+@media (max-width: 992px) {
+
+  #back01,
+  #back02 {
+    display: none;
   }
 }
