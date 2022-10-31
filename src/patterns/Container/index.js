@@ -1,12 +1,8 @@
 import { Grid } from 'antd';
-import { useEffect } from 'react';
 import './Container.css';
 const { useBreakpoint } = Grid;
 const Container = ({ children, style }) => {
     const screens = useBreakpoint();
-    useEffect(() => {
-        console.log(screens)
-    }, [screens])
     return (
         <section
             className="container-component"

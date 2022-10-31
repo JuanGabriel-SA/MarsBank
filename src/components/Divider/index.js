@@ -5,7 +5,7 @@ const Divider = ({ color, style, space }) => {
             marginLeft: space !== undefined ? space : 0,
             marginRight: space !== undefined ? space : 0,
             color: color,
-            opacity: 0.3,
+            opacity: 0.1,
             ...style
         }} />
     )

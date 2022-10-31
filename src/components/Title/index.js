@@ -1,8 +1,9 @@
 import { Grid } from 'antd';
+import { motion } from 'framer-motion';
 import './Title.css';
 const { useBreakpoint } = Grid;
 
-const Title = ({ children, size, style, thickness, color, responsive, ...props }) => {
+const Title = ({ children, size, style, thickness, color, responsive, animated, ...props }) => {
   const screens = useBreakpoint();
 
   function responsiveFont() {
@@ -14,14 +15,25 @@ const Title = ({ children, size, style, thickness, color, responsive, ...props }
       return 60;
   }
 
-  return <h1
-    className='title-component'
-    style={{
-      fontSize: responsive ? responsiveFont() : size,
-      fontWeight: thickness !== undefined && thickness,
-      color: color !== undefined && color,
-      ...style
-    }}>{children}</h1>;
+  return (
+    <motion.h1
+      animate={animated && { 
+        scale: [1.4, 1],
+        opacity: [0, 1],
+        transition: {
+          delay: 0.2,
+          ease: 'circOut',
+          duration: 1
+        }
+      }}
+      className='title-component'
+      style={{
+        fontSize: responsive ? responsiveFont() : size,
+        fontWeight: thickness !== undefined && thickness,
+        color: color !== undefined && color,
+        ...style
+      }}>{children}</motion.h1>
+  );
 };
 
 export default Title;

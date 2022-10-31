@@ -1,4 +1,26 @@
 .button-component {
+    transition: ease-in-out 0.2s;
+}
+
+.button-component:hover {
+    transform: scale(1.07);
+    cursor: pointer;
+    background-color: var(--primary-color4);
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.button-component:hover .button-component-icon {
+    right: 20px;
+}
+
+.button-component-icon  {
+    position: relative;
+    right: 40px;
+    top: 2px;
+    transition: ease-out 0.2s;
+}
+
+.light-primary {
     margin: 10px;
     padding: 10px;
     font-weight: 400;
@@ -6,11 +28,14 @@
     border-radius: 20px;
     border: none;
     color: white;
-    transition: ease-in-out 0.2s;
 }
 
-.button-component:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-    background-color: var(--primary-color4);
+.modern-primary {
+    margin: 10px;
+    padding: 10px;
+    font-weight: 400;
+    background: var(--primary-gradient1);
+    border-radius: 20px;
+    border: none;
+    color: white;
 }

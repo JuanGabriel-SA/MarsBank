@@ -1,0 +1,43 @@
+.input-component {
+    padding: 10px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.input-content text {
+    margin-left: 20px !important;
+}
+
+.input-component-icon {
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+    top: 4px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.line-type-input {
+    display: inline-block;
+    border: none;
+    width: 80%;
+}
+
+.line-input {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.1);
+    transform-origin: center;
+    transform: scale(0);
+    transition: ease-in-out 0.3s;
+}
+
+.line-type-input:focus ~ .line-input {
+    outline: none;
+    background: rgba(0, 0, 0, 0.4);
+    transform: scale(1);
+}
+
+.line-type-input:focus {
+    border: none;
+    outline: none;
+}

@@ -11,8 +11,9 @@
 
 .modal-content {
     display: flex;
-    width: 550px;
-    height: 200px;
+    max-width: 550px;
+    min-height: 200px;
+    max-height: 100vh;
     background-color: white;
     border-radius: 20px;
 }
@@ -29,17 +30,13 @@
 
 .close-modal-icon {
     position: relative;
-    top: 15px;
-    left: 94%;
-    opacity: 0.7;
+    top: 30px;
+    left: 90%;
     cursor: pointer;
-}
-
-.close-modal-icon {
-    transition: ease-out 10ms;
+    transition: ease-out 100ms;
+    z-index: 1;
 }
 
 .close-modal-icon:hover {
-    opacity: 1;
     transform: scale(1.5);
 }
