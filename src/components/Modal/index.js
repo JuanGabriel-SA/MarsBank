@@ -16,7 +16,7 @@ const Modal = ({ children, style, toggle, setToggle, onClose, mask, maskColor, t
         window.addEventListener('keydown', close);
         return () => window.removeEventListener('keydown', close);
     }, []);
-    
+
     return (
         <motion.div
             className="modal-component"

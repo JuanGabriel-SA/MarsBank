@@ -3,7 +3,9 @@ import 'antd/dist/antd.css';
 import React, { useEffect, useState } from 'react';
 import { AiFillMail, AiOutlineLogin } from 'react-icons/ai';
 import { FaLock, FaUserAlt } from 'react-icons/fa';
+import { useDispatch, useSelector } from "react-redux";
 import './App.css';
+import Alert from './components/Alert';
 import Button from './components/Button';
 import Field from './components/Field';
 import InputField from './components/InputField';
@@ -12,15 +14,20 @@ import Title from './components/Title';
 import Logo from './imgs/logo-assets/logo_transparent.png';
 import Container from './patterns/Container';
 import Main from './patterns/Main';
+import { newUser } from './redux/actions/Users.actions';
+import createId from './utils/createId';
 const { useBreakpoint } = Grid;
 
 const App = () => {
   const screens = useBreakpoint();
   const [toggleModal01, setToggleModal01] = useState(false);
   const [toggleModal02, setToggleModal02] = useState(false);
-  const [newUser, setNewUser] = useState({});
+  const [registeredUser, setRegisteredUser] = useState({});
   const [password, setPassword] = useState('');
-
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
 
   function responsiveFont(lg, md, sm) {
     if (screens.xxl || screens.xl || screens.lg)
@@ -42,8 +49,52 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log(newUser)
-  }, [newUser])
+
+  }, [registeredUser])
+
+  function verifyFields() {
+    if (Object.keys(registeredUser).length === 3) {
+      for (let prop in registeredUser) {
+        if (registeredUser[prop] === '')
+          return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  function register() {
+    if (verifyFields()) {
+      if (password === registeredUser.password) {
+        createUser();
+      } else {
+        setErrorMessage('As senhas devem ser iguais.');
+        setShowError(true);
+      }
+    } else {
+      setErrorMessage('Não deixe campos vazios.');
+      setShowError(true);
+    }
+  }
+
+  function createUser() {
+    let user = { ...registeredUser, id: createId(state.users) };
+    dispatch(newUser(user));
+  }
+
+  function resetRegisterModal() {
+    
+  }
+  useEffect(() => {
+    console.log(state.users)
+  }, [state.users])
+
+  useEffect(() => {
+    if(!toggleModal01) {
+      setRegisteredUser({});
+      setPassword('');
+    }
+  }, [toggleModal01])
 
   return (
     <Main className="home">
@@ -60,10 +111,11 @@ const App = () => {
           <Col xs={{ span: 24 }}>
             <Field>
               <InputField
-                onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                onFocus={() => setShowError(false)}
+                onChange={(e) => setRegisteredUser({ ...registeredUser, name: e.target.value })}
+                value={registeredUser.name}
                 block
                 display='line'
-                type='text'
                 placeholder='Digite seu nome'
                 icon={FaUserAlt}
                 iconStyle={{ top: 2 }}>
@@ -74,11 +126,12 @@ const App = () => {
           <Col xs={{ span: 24 }}>
             <Field>
               <InputField
-                onChange={(e) => setNewUser({ ...newUser, mail: e.target.value })}
+                onFocus={() => setShowError(false)}
+                onChange={(e) => setRegisteredUser({ ...registeredUser, mail: e.target.value })}
                 block
                 display='line'
-                type='email'
                 placeholder='Digite seu email'
+                value={registeredUser.mail}
                 icon={AiFillMail}
                 iconStyle={{ top: 3 }}>
                 Email
@@ -88,7 +141,8 @@ const App = () => {
           <Col xs={{ span: 24 }}>
             <Field>
               <InputField
-                onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                onFocus={() => setShowError(false)}
+                onChange={(e) => setRegisteredUser({ ...registeredUser, password: e.target.value })}
                 block
                 display='line'
                 type='password'
@@ -102,6 +156,7 @@ const App = () => {
           <Col xs={{ span: 24 }}>
             <Field>
               <InputField
+                onFocus={() => setShowError(false)}
                 onChange={(e) => setPassword(e.target.value)}
                 block
                 display='line'
@@ -113,10 +168,11 @@ const App = () => {
               </InputField>
             </Field>
           </Col>
+          <Alert type='error' visible={showError} trigger={setShowError}>{errorMessage}</Alert>
           <Col xs={{ span: 24 }}>
             <Row justify='center'>
               <Field block>
-                <Button type='modern-primary' block icon={AiOutlineLogin}>
+                <Button type='modern-primary' block icon={AiOutlineLogin} onClick={() => register()}>
                   Cadastrar-se
                 </Button>
               </Field>
