@@ -22,7 +22,7 @@ const App = () => {
   const screens = useBreakpoint();
   const [toggleModal01, setToggleModal01] = useState(false);
   const [toggleModal02, setToggleModal02] = useState(false);
-  const [registeredUser, setRegisteredUser] = useState({});
+  const [registeredUser, setRegisteredUser] = useState('');
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -82,19 +82,38 @@ const App = () => {
     dispatch(newUser(user));
   }
 
+  function changeInputStatus(value) {
+    if ((value == '' || value == undefined) && showError)
+      return 'error'
+    else
+      return null
+  }
+
+  function changePasswordStatus() {
+    if (password !== registeredUser.password && showError)
+      return 'error'
+    else
+      return null;
+  }
+
   function resetRegisterModal() {
-    
+
   }
   useEffect(() => {
-    console.log(state.users)
+ 
   }, [state.users])
 
   useEffect(() => {
-    if(!toggleModal01) {
+    if (!toggleModal01) {
+      console.log(registeredUser)
       setRegisteredUser({});
       setPassword('');
     }
   }, [toggleModal01])
+
+  useEffect(() => {
+
+  }, [registeredUser])
 
   return (
     <Main className="home">
@@ -113,8 +132,9 @@ const App = () => {
               <InputField
                 onFocus={() => setShowError(false)}
                 onChange={(e) => setRegisteredUser({ ...registeredUser, name: e.target.value })}
-                value={registeredUser.name}
+                value={registeredUser.name == undefined ? '': registeredUser.name}
                 block
+                status={changeInputStatus(registeredUser.name)}
                 display='line'
                 placeholder='Digite seu nome'
                 icon={FaUserAlt}
@@ -131,7 +151,8 @@ const App = () => {
                 block
                 display='line'
                 placeholder='Digite seu email'
-                value={registeredUser.mail}
+                value={registeredUser.mail == undefined ? '': registeredUser.mail}
+                status={changeInputStatus(registeredUser.mail)}
                 icon={AiFillMail}
                 iconStyle={{ top: 3 }}>
                 Email
@@ -145,6 +166,8 @@ const App = () => {
                 onChange={(e) => setRegisteredUser({ ...registeredUser, password: e.target.value })}
                 block
                 display='line'
+                value={registeredUser.password == undefined ? '': registeredUser.password}
+                status={changePasswordStatus()}
                 type='password'
                 placeholder='Digite sua senha'
                 icon={FaLock}
@@ -160,6 +183,8 @@ const App = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 block
                 display='line'
+                value={password}
+                status={changePasswordStatus()}
                 type='password'
                 placeholder='Confirme a senha'
                 icon={FaLock}

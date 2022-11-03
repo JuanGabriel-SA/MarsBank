@@ -4,16 +4,11 @@
     overflow: hidden;
 }
 
-.input-content text {
-    margin-left: 20px !important;
-}
-
 .input-component-icon {
     display: inline-block;
     position: relative;
     margin-right: 10px;
     top: 4px;
-    color: rgba(0, 0, 0, 0.4);
 }
 
 .line-type-input {
