@@ -12,14 +12,16 @@
 
 html {
   font-family: 'Vazirmatn', sans-serif;
+  scrollbar-color: white #0d007b;
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Manrope', sans-serif !important;
   background-image: url('./imgs/background-1.png');
   background-position-y: bottom;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow-x: hidden;
 }
 
 .background-element {

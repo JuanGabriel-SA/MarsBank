@@ -10,9 +10,11 @@ import Button from './components/Button';
 import Field from './components/Field';
 import InputField from './components/InputField';
 import Modal from './components/Modal';
+import Sucess from './components/Sucess';
 import Title from './components/Title';
 import Logo from './imgs/logo-assets/logo_transparent.png';
 import Container from './patterns/Container';
+import Footer from './patterns/Footer';
 import Main from './patterns/Main';
 import { newUser } from './redux/actions/Users.actions';
 import createId from './utils/createId';
@@ -26,6 +28,7 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showSucess, setShowSucess] = useState(false);
   const dispatch = useDispatch();
   const state = useSelector(state => state);
 
@@ -39,7 +42,7 @@ const App = () => {
   }
 
   function changeModals(to) {
-    if (to == 'login') {
+    if (to === 'login') {
       setToggleModal01(false);
       setToggleModal02(true);
     } else {
@@ -80,10 +83,12 @@ const App = () => {
   function createUser() {
     let user = { ...registeredUser, id: createId(state.users) };
     dispatch(newUser(user));
+    setToggleModal01(false);
+    setShowSucess(true);
   }
 
   function changeInputStatus(value) {
-    if ((value == '' || value == undefined) && showError)
+    if ((value === '' || value === undefined) && showError)
       return 'error'
     else
       return null
@@ -96,11 +101,8 @@ const App = () => {
       return null;
   }
 
-  function resetRegisterModal() {
-
-  }
   useEffect(() => {
- 
+
   }, [state.users])
 
   useEffect(() => {
@@ -109,6 +111,8 @@ const App = () => {
       setRegisteredUser({});
       setPassword('');
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toggleModal01])
 
   useEffect(() => {
@@ -117,6 +121,7 @@ const App = () => {
 
   return (
     <Main className="home">
+      <Sucess animate={showSucess} toggle={setShowSucess} />
       {/*MODAL CADASTRAR*/}
       <Modal toggle={toggleModal01} setToggle={setToggleModal01} style={{ width: 400 }}>
         <Row>
@@ -132,7 +137,7 @@ const App = () => {
               <InputField
                 onFocus={() => setShowError(false)}
                 onChange={(e) => setRegisteredUser({ ...registeredUser, name: e.target.value })}
-                value={registeredUser.name == undefined ? '': registeredUser.name}
+                value={registeredUser.name === undefined ? '' : registeredUser.name}
                 block
                 status={changeInputStatus(registeredUser.name)}
                 display='line'
@@ -151,7 +156,7 @@ const App = () => {
                 block
                 display='line'
                 placeholder='Digite seu email'
-                value={registeredUser.mail == undefined ? '': registeredUser.mail}
+                value={registeredUser.mail === undefined ? '' : registeredUser.mail}
                 status={changeInputStatus(registeredUser.mail)}
                 icon={AiFillMail}
                 iconStyle={{ top: 3 }}>
@@ -166,7 +171,7 @@ const App = () => {
                 onChange={(e) => setRegisteredUser({ ...registeredUser, password: e.target.value })}
                 block
                 display='line'
-                value={registeredUser.password == undefined ? '': registeredUser.password}
+                value={registeredUser.password === undefined ? '' : registeredUser.password}
                 status={changePasswordStatus()}
                 type='password'
                 placeholder='Digite sua senha'
@@ -206,7 +211,7 @@ const App = () => {
           <Col xs={{ span: 24 }}>
             <Row justify='center'>
               <Field top={0}>
-                <label>Já tem um conta? <a onClick={() => changeModals('login')} style={{ marginLeft: 2 }}> Fazer login</a></label>
+                <label>Já tem um conta? <a href='/' onClick={() => changeModals('login')} style={{ marginLeft: 2 }}> Fazer login</a></label>
               </Field>
             </Row>
           </Col>
@@ -249,7 +254,7 @@ const App = () => {
           <Col xs={{ span: 24 }}>
             <Row justify='center'>
               <Field top={0}>
-                <label>Não possui uma conta? <a onClick={() => changeModals('cadastrar-se')} style={{ marginLeft: 2 }}> Cadastrar-se</a></label>
+                <label>Não possui uma conta? <a  href='/' onClick={() => changeModals('cadastrar-se')} style={{ marginLeft: 2 }}> Cadastrar-se</a></label>
               </Field>
             </Row>
           </Col>
@@ -258,7 +263,7 @@ const App = () => {
       {/*FIM MODAL LOGIN*/}
       <Row>
         <Col xs={{ span: 24 }}>
-          <img id="logo" src={Logo} width={250} />
+          <img id="logo" src={Logo} width={250} alt='none' />
           <Row justify='end'>
             <Field className='button-field'>
               <Button onClick={() => setToggleModal02(true)}>Entrar</Button>
@@ -284,6 +289,7 @@ const App = () => {
           </Container>
         </Col>
       </Row>
+      <Footer />
     </Main>
   );
 };

@@ -12,6 +12,7 @@
 .modal-content {
     display: flex;
     max-width: 550px;
+    min-width: 200px;
     min-height: 200px;
     max-height: 100vh;
     background-color: white;

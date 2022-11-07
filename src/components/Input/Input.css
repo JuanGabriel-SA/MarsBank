@@ -11,6 +11,11 @@
     top: 4px;
 }
 
+.svg {
+    width: 400px;
+    height: 400px;
+}
+
 .line-type-input {
     display: inline-block;
     border: none;

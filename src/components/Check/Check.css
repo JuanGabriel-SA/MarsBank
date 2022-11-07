@@ -1,0 +1,40 @@
+.cls-1 {
+    fill: #f73f52;
+}
+
+.cls-2 {
+    fill: #f73f52;
+}
+
+.cls-3 {
+    fill: #fff;
+}
+
+.cls-3,
+.cls-4 {
+    stroke: #000;
+}
+
+.cls-3,
+.cls-4,
+.cls-6 {
+    stroke: 10;
+}
+
+.cls-4 {
+    fill: #c1272d;
+}
+
+.cls-5 {
+    fill: #a03939;
+}
+
+.cls-6 {
+    fill: none;
+    stroke: #f7f7f7;
+    stroke-width: 66px;
+}
+
+.circle-details {
+    transform-origin: center !important;
+}
