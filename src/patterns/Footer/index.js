@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { BsFacebook, BsInstagram, BsLinkedin } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 const Footer = ({ children, style, ...props }) => {
     return (
@@ -27,9 +28,11 @@ const Footer = ({ children, style, ...props }) => {
                 {/* Texto */}
                 <motion.ul>
                     <motion.li>
-                        <label className='footer-text'>
-                            Home
-                        </label>
+                        <Link to='/home'>
+                            <label className='footer-text'>
+                                Home
+                            </label>
+                        </Link>
                     </motion.li>
                     <motion.li>
                         <label className='footer-text'>

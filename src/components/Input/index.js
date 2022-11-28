@@ -11,7 +11,7 @@ const Input = ({ display, icon, iconStyle, status, ...props }) => {
         if(status == 'error') {
             return {
                 color: 'red',
-                fontWeight: 600
+                fontWeight: 400
             }
         }
     }

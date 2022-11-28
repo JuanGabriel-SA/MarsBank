@@ -1,12 +1,9 @@
-html {
-  font-family: 'Vazirmatn', sans-serif;
-  scrollbar-color: white #0d007b;
-}
 
-body {
+
+.home {
   font-family: 'Manrope', sans-serif !important;
-  background-image: url('./imgs/background-1.png');
-  background-position-y: bottom;
+  background-image: url('../../imgs/background-1.png');
+  background-position-y: -120px;
   background-repeat: no-repeat;
   background-size: cover;
   overflow-x: hidden;
